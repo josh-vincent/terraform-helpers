@@ -51,6 +51,17 @@ locals {
 }
 ```
 
+### Create RSA Keys 
+```
+$ ssh-keygen -t rsa -b 4096
+# Enter file in which to save the key (/Users/Username/.ssh/id_rsa): /Users/Username/.ssh/NEW_KEYNAME_HERE
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+
+Go to path where you saved your key: /Users/Username/.ssh/NEW_KEYNAME_HERE
+Copy the public key or NEW_KEYNAME_HERE.pub
+```
+
 ### Aws Keypair creation 
 ```
 application 
