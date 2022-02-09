@@ -15,6 +15,7 @@ output "removed_first" {
 
 ### Add tags using yaml file
 ```yaml
+# path/to/tags.yaml
 ---
 cost-centre: "0000000"
 environment: "Enviroment-1"
@@ -26,7 +27,8 @@ tags = yamldecode(templatefile("path/to/tags.yaml", {}))
 ```
 
 ### Split text file by new lines 
-``` #emails.txt
+``` 
+# path/to/emails.txt
 firstemail@domain.com 
 secondemail@domain.com
 ```
