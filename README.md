@@ -13,6 +13,18 @@ output "removed_first" {
 #result: ["item-1","item-2", "item-3"]
 ```
 
+### For_each excluding first item 
+```
+locals {
+  items = ["item-0","item-1","item-2", "item-3"]
+}
+
+data "test_block" "this" {
+  for_each          = toset(slice(items.users, 1, length(items.users)))
+  #...
+}
+```
+
 ### Add tags using yaml file
 ```yaml
 # path/to/tags.yaml
