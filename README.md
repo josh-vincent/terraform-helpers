@@ -12,3 +12,15 @@ output "removed_first" {
 
 #result: ["item-1","item-2", "item-3"]
 ```
+
+### Add tags using yaml file
+```yaml
+---
+cost-centre: "0000000"
+environment: "Enviroment-1"
+managed-by: "Terraform"
+```
+
+```terraform
+tags = yamldecode(templatefile("path/to/tags.yaml", {}))
+```
