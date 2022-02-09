@@ -9,4 +9,6 @@ locals {
 output "removed_first" {
   slice(locals.items, 1, length(locals.items)))
 }
+
+#result: ["item-1","item-2", "item-3"]
 ```
