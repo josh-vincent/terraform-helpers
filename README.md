@@ -24,3 +24,15 @@ managed-by: "Terraform"
 ```terraform
 tags = yamldecode(templatefile("path/to/tags.yaml", {}))
 ```
+
+### Split text file by new lines 
+``` #emails.txt
+firstemail@domain.com 
+secondemail@domain.com
+```
+
+```terraform 
+locals {
+  email_addresses = split("\n", file("path/to/emails.txt"))
+}
+```
