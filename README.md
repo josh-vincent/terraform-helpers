@@ -14,7 +14,7 @@ output "removed_first" {
 ```
 
 ### For_each excluding first item 
-```
+```terraform
 locals {
   items = ["item-0","item-1","item-2", "item-3"]
 }
