@@ -53,7 +53,7 @@ locals {
 
 ### Create RSA Keys 
 ```
-$ ssh-keygen -t rsa -b 4096
+$ ssh-keygen -m PEM -t rsa -b 4096
 # Enter file in which to save the key (/Users/Username/.ssh/id_rsa): /Users/Username/.ssh/NEW_KEYNAME_HERE
 Enter passphrase (empty for no passphrase): 
 Enter same passphrase again: 
