@@ -1,8 +1,8 @@
 ## Strings
-String may not contain character
+### String may not contain character
 
 Scenario: String may not contain a /.
-```
+```hcl
 variable "string_may_not_contain" {
   type = string
   default = "test"
@@ -17,7 +17,7 @@ variable "string_may_not_contain" {
 ### String with valid options
 
 Scenario: Here we have a string and we only allow to values "approved" or "disapproved". I show 2 examples of the same check using different methods:
-```
+```hcl
 variable "string_only_valid_options" {
   type = string
   default = "approved"
@@ -39,7 +39,7 @@ variable "string_only_valid_options" {
 ### Valid AWS Region Name
 
 Scenario: string must be like AWS region
-```
+```hcl
 variable "string_like_aws_region" {
   type = string
   default = "us-east-1"
@@ -52,7 +52,7 @@ variable "string_like_aws_region" {
 ### Valid IAM ARN
 
 Scenario: Your string must be a valid IAM role
-```
+```hcl
 variable "string_valid_iam_role_name" {
     type = string
     default = "arn:aws:iam::123456789012:role/MyCoolRole"
@@ -66,7 +66,7 @@ variable "string_valid_iam_role_name" {
 ### Valid IPv4 CIDR
 
 Scenario: Your string input needs to look like a IPv4 CIDR.
-```
+```hcl
 variable "string_like_valid_ipv4_cidr" {
   type    = string
   default = "10.0.0.0/16"
@@ -81,7 +81,7 @@ variable "string_like_valid_ipv4_cidr" {
 ### Map with optional conflicting keys
 
 Scenario: You have a map variable and 2 keys conflict, in this case, you can only set either cidr or netmask.
-```
+```hcl
 variable "only_one_optional_key" {
     type = object({
         name = optional(string)
@@ -106,7 +106,7 @@ variable "only_one_optional_key" {
 
 Scenario: number must be between 1-16.
 
-```
+```hcl
 variable "num_in_range" {
   type        = number
   default     = 1
