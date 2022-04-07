@@ -14,6 +14,19 @@ variable "string_may_not_contain" {
 }
 ```
 
+### Url 
+Scenario: String must be a valid url
+```hcl
+variable "string_contains_url" {
+  type = string
+  description = "String must be a valid URL"
+  validation {
+    error_message = "Must be valid url."
+    condition     = can(regex("https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)", var.webhook_url))
+  }
+}
+```
+
 ### String with valid options
 
 Scenario: Here we have a string and we only allow to values "approved" or "disapproved". I show 2 examples of the same check using different methods:
