@@ -22,7 +22,7 @@ variable "string_contains_url" {
   description = "String must be a valid URL"
   validation {
     error_message = "Must be valid url."
-    condition     = can(regex("https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)", var.webhook_url))
+    condition     = can(regex("^(?:(?P<scheme>[^:/?#]+):)?(?://(?P<authority>[^/?#]*))?", var.string_contains_url))
   }
 }
 ```
