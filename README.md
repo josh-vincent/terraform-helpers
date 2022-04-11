@@ -87,8 +87,9 @@ resource "aws_key_pair" "ec2-keypair" {
   public_key = file(each.key)
   tags       =  yamldecode(templatefile("files/tags/tags.yaml",{}))
 }
+```
 
-### Read Yaml and map 
+## Read Yaml and map 
 ```yaml 
 urls:
   - id: site1
@@ -102,8 +103,8 @@ urls:
     secure: true
 ```
 
-# map constructor and iterate through yaml map
-# key = "urls", urls is list of objects
+### map constructor and iterate through yaml map
+#### key = "urls", urls is list of objects
 ```hcl
 { for key, urls in yamldecode(file("urls.yaml")) : key => [
     # inside list constructor now
