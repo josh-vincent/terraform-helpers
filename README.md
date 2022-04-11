@@ -87,3 +87,48 @@ resource "aws_key_pair" "ec2-keypair" {
   public_key = file(each.key)
   tags       =  yamldecode(templatefile("files/tags/tags.yaml",{}))
 }
+
+### Read Yaml and map 
+```yaml 
+urls:
+  - id: site1
+    url: google.de
+    secure: false
+  - id: site2
+    url: bing.com
+    secure: false
+  - id: site3
+    url: duckduckgo.com
+    secure: true
+```
+
+# map constructor and iterate through yaml map
+# key = "urls", urls is list of objects
+```hcl
+{ for key, urls in yamldecode(file("urls.yaml")) : key => [
+    # inside list constructor now
+    # url_attrs is single object in list of objects
+    for url_attrs in urls : {
+      # inside object constructor now
+      # retain same key value pairs, and add a "secure" key value pair
+      id     = url_attrs.id
+      url    = url_attrs.url
+      secure = url_attrs.secure
+    }
+  ]
+}
+
+#Creates hcl like this.
+{
+  urls = [
+    {
+      id     = "site1"
+      secure = false
+      url    = "google.de"
+    },
+  ]
+}
+
+```
+
+
