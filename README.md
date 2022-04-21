@@ -39,11 +39,46 @@ tags = yamldecode(templatefile("path/to/tags.yaml", {}))
 ```
 
 #### Combine tags to include last commit + repository name 
+When working in parent folder 
+```
+repository-name 
+| files
+| |- tags 
+|   |-tags.yaml
+|- main.tf 
+...
+```
+
 ```hcl 
 locals {
   repo_tags = tomap({
     "Commit": trimspace(file(".git/${trimspace(trimprefix(file(".git/HEAD"), "ref:"))}")),
     "Repository": basename(abspath(path.cwd))
+  })
+  combined_tags = merge(yamldecode(templatefile("${path.module}/files/tags/tags.yaml",{})), local.repo_tags)
+}
+```
+
+When working with nested directory 
+```
+repository-name 
+|- folder1 
+|  | files
+|  | |- tags 
+|  |   |-tags.yaml
+|  |- main.tf 
+|  | ...
+|- folder2 
+...
+```
+
+```hcl 
+locals {
+  filename = split("/",dirname(path.cwd))
+  path = element(split("/", dirname(path.cwd)),length(local.filename)-1)
+  repo_tags = tomap({
+    "Commit": trimspace(file("../.git/${trimspace(trimprefix(file("../.git/HEAD"), "ref:"))}")),
+    "Repository": "${local.path}/${basename(abspath(path.cwd))}"
   })
   combined_tags = merge(yamldecode(templatefile("${path.module}/files/tags/tags.yaml",{})), local.repo_tags)
 }
