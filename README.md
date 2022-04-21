@@ -38,6 +38,17 @@ managed-by: "Terraform"
 tags = yamldecode(templatefile("path/to/tags.yaml", {}))
 ```
 
+#### Combine tags to include last commit + repository name 
+```hcl 
+locals {
+  repo_tags = tomap({
+    "Commit": trimspace(file(".git/${trimspace(trimprefix(file(".git/HEAD"), "ref:"))}")),
+    "Repository": basename(abspath(path.cwd))
+  })
+  combined_tags = merge(yamldecode(templatefile("${path.module}/files/tags/tags.yaml",{})), local.repo_tags)
+}
+```
+
 ### Split text file by new lines 
 ``` 
 # path/to/emails.txt
